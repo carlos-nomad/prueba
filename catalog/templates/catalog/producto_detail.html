@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Producto: {{ producto.nombre }}</h1>
+
+  <!-- author detail link not yet defined -->
+  <p><strong>Descripcion:</strong> {{ producto.descripcion }}</p>
+  <p><strong>Precio:</strong> {{ producto.precio }}</p>
+  <p><strong>Cantidad:</strong> {{producto.cantidad}}</p>
+
+{% endblock %}
