@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse   
 from django.views import generic
-from .models import Producto
+from .models import *
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -25,6 +26,11 @@ class ProductListView(generic.ListView):
 class ProductDetailView(generic.DetailView):
     model = Producto
 
-@api_view(['GET'])
-def api(request):
-    return Response({'message': 'Hello, world!'})
+class ProductApiView(APIView):
+    def get(self, request):
+        allProductos= Producto.objects.all().values()
+        return Response(allProductos)
+    
+    def delete(self, request):
+        Producto.objects.filter(id=request.data['id']).delete()
+        return Response('object deleted')
